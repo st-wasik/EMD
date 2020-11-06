@@ -2,7 +2,11 @@
 title: "Powtarzalne eksperymenty"
 author: "Stanisław Wasik"
 date: "06.11.2020"
-output: html_document
+output:
+  md_document: default
+  html_document: default
+  keep_md: yes
+  pdf_document: default
 ---
 
 ```{r setup, include=FALSE}
