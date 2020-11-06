@@ -1,0 +1,61 @@
+---
+title: "Powtarzalne eksperymenty"
+author: "Stanisław Wasik"
+date: "06.11.2020"
+output: html_document
+---
+
+```{r setup, include=FALSE}
+library(knitr)
+knitr::opts_chunk$set(echo = TRUE, warning=FALSE, message=FALSE)
+```
+
+## Wczytywanie danych (bibliotek)
+```{r result='hide'}
+library(EDAWR)
+library(dplyr)
+library(ggplot2)
+require(reshape2)
+```
+
+## Cache'owanie bloku wczytującego dane
+```{r cache=TRUE}
+df <- data.frame(tb)
+```
+
+## Prezentacja krótkiego podsumowania danych w zbiorze
+```{r}
+knitr::kable(summary(df), na.rm=TRUE)
+```
+
+## Prezentacja liczby zachorowań z podziałem na płeć
+```{r}
+df %>% 
+  rowwise %>% 
+  mutate(total=sum(child, adult, elderly, na.rm=TRUE)) %>% 
+  group_by(sex) %>% 
+  summarise(count=sum(total)) %>% 
+  knitr::kable()
+```
+
+## 5. Prezentacja na wykresie liniowym sumarycznej liczby zachorowań wśród dzieci, dorosłych i osób starszych w kolejnych latach
+```{r}
+df %>% 
+  rowwise %>% 
+  mutate(total=sum(child, adult, elderly, na.rm=TRUE)) %>%
+  group_by(year) %>%
+  summarise(child=sum(child, na.rm=TRUE), adult=sum(adult, na.rm=TRUE), elderly=sum(elderly, na.rm=TRUE)) %>%
+  melt(id.vars = 'year', variable.name = 'series') %>%
+  ggplot(aes(year,value)) + geom_line(aes(colour = series))
+```
+
+## 6. Prezentacja sumarycznej liczby zachorowań osobno dla każdego kraju
+```{r}
+df %>% 
+  rowwise %>% 
+  mutate(total=sum(child, adult, elderly, na.rm=TRUE)) %>%
+  group_by(country, year) %>% 
+  summarise(total=sum(child, na.rm=TRUE) + sum(adult, na.rm=TRUE) + sum(elderly, na.rm=TRUE)) %>%
+  ggplot(aes(year,total,colour=country)) + geom_line(show.legend = FALSE)
+
+```
