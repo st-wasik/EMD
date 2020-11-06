@@ -133,8 +133,8 @@ Prezentacja liczby zachorowań z podziałem na płeć
 </tbody>
 </table>
 
-5. Prezentacja na wykresie liniowym sumarycznej liczby zachorowań wśród dzieci, dorosłych i osób starszych w kolejnych latach
------------------------------------------------------------------------------------------------------------------------------
+Prezentacja na wykresie liniowym sumarycznej liczby zachorowań wśród dzieci, dorosłych i osób starszych w kolejnych latach
+--------------------------------------------------------------------------------------------------------------------------
 
     df %>% 
       rowwise %>% 
@@ -146,8 +146,8 @@ Prezentacja liczby zachorowań z podziałem na płeć
 
 ![](poweks_files/figure-markdown_strict/unnamed-chunk-5-1.png)
 
-6. Prezentacja sumarycznej liczby zachorowań osobno dla każdego kraju
----------------------------------------------------------------------
+Prezentacja sumarycznej liczby zachorowań osobno dla każdego kraju
+------------------------------------------------------------------
 
     df %>% 
       rowwise %>% 

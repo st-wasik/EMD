@@ -3,8 +3,8 @@ title: "Powtarzalne eksperymenty"
 author: "Stanisław Wasik"
 date: "06.11.2020"
 output:
-  md_document: default
   html_document: default
+  md_document: default
   keep_md: yes
   pdf_document: default
 ---
@@ -42,7 +42,7 @@ df %>%
   knitr::kable()
 ```
 
-## 5. Prezentacja na wykresie liniowym sumarycznej liczby zachorowań wśród dzieci, dorosłych i osób starszych w kolejnych latach
+## Prezentacja na wykresie liniowym sumarycznej liczby zachorowań wśród dzieci, dorosłych i osób starszych w kolejnych latach
 ```{r}
 df %>% 
   rowwise %>% 
@@ -53,7 +53,7 @@ df %>%
   ggplot(aes(year,value)) + geom_line(aes(colour = series))
 ```
 
-## 6. Prezentacja sumarycznej liczby zachorowań osobno dla każdego kraju
+## Prezentacja sumarycznej liczby zachorowań osobno dla każdego kraju
 ```{r}
 df %>% 
   rowwise %>% 
