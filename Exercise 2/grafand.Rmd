@@ -1,0 +1,70 @@
+---
+title: "Graficzna analiza danych"
+author: "Stanisław Wasik"
+date: "06.11.2020"
+output: md_document 
+# html_document
+---
+
+```{r setup, include=FALSE}
+library(knitr)
+knitr::opts_chunk$set(echo = TRUE, warning=FALSE, message=FALSE)
+```
+
+```{r result='hide'}
+library(dplyr)
+library(ggplot2)
+require(reshape2)
+
+df <- data.frame(diamonds)
+```
+
+## Wyświetl histogram zmiennej depth
+```{r}
+qplot(main="Depth Histogram", xlab="depth") + geom_histogram(mapping=aes(depth), data=df, fill=I("white"), col=I("red"))
+```
+
+## Ustaw szerokość kubełka histogramu na 0.2
+```{r}
+qplot(main="Depth Histogram", xlab="depth") + geom_histogram(mapping=aes(depth), data=df, fill=I("white"), col=I("red"), binwidth=0.2)
+```
+
+## Ogranicz oś x do przedziału [55, 70]
+```{r}
+qplot(main="Depth Histogram", xlab="depth") + geom_histogram(mapping=aes(depth), data=df, fill=I("white"), col=I("red"), binwidth=0.2) + xlim(55,70)
+```
+
+## Sprawdź jak zmienna cut wpływa na histogram:
+
+### za pomocą koloru
+
+### za pomocą paneli
+```{r}
+qplot(main="Depth Histogram grouped by cut", xlab="depth") + facet_wrap(~cut) + geom_histogram(mapping=aes(depth), data=df, fill=I("white"), col=I("red"), binwidth=0.2) + xlim(55,70)
+```
+
+## Powtórz kroki dla zmiennej price (być może zmieniając wartości części parametrów)
+
+## Wyświetl histogram zmiennej price
+```{r}
+qplot(main="Price Histogram", xlab="price") + geom_histogram(mapping=aes(price), data=df, fill=I("white"), col=I("red"))
+```
+
+## Ustaw szerokość kubełka histogramu
+```{r}
+qplot(main="Price Histogram", xlab="price") + geom_histogram(mapping=aes(price), data=df, fill=I("white"), col=I("red"), binwidth=250)
+```
+
+## Ogranicz oś x 
+```{r}
+qplot(main="Price Histogram", xlab="price") + geom_histogram(mapping=aes(price), data=df, fill=I("white"), col=I("red"), binwidth=250) + xlim(350,15000)
+```
+
+## Sprawdź jak zmienna cut wpływa na histogram:
+
+### za pomocą koloru
+
+### za pomocą paneli
+```{r}
+qplot(main="Price Histogram grouped by cut", xlab="price") + facet_wrap(~cut) + geom_histogram(mapping=aes(price), data=df, fill=I("white"), col=I("red"), binwidth=250) + xlim(350,15000)
+```
