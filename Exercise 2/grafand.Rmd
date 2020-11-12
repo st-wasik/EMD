@@ -3,7 +3,7 @@ title: "Graficzna analiza danych"
 author: "Stanisław Wasik"
 date: "06.11.2020"
 output: md_document 
-# html_document
+#output: html_document
 ---
 
 ```{r setup, include=FALSE}
@@ -37,6 +37,9 @@ qplot(main="Depth Histogram", xlab="depth") + geom_histogram(mapping=aes(depth),
 ## Sprawdź jak zmienna cut wpływa na histogram:
 
 ### za pomocą koloru
+```{r}
+qplot(main="Depth Histogram grouped by cut", xlab="depth") + geom_histogram(mapping=aes(depth, color=cut), data=df, binwidth=0.2) + xlim(55,70)
+```
 
 ### za pomocą paneli
 ```{r}
@@ -45,26 +48,34 @@ qplot(main="Depth Histogram grouped by cut", xlab="depth") + facet_wrap(~cut) + 
 
 ## Powtórz kroki dla zmiennej price (być może zmieniając wartości części parametrów)
 
-## Wyświetl histogram zmiennej price
+### Wyświetl histogram zmiennej price
 ```{r}
 qplot(main="Price Histogram", xlab="price") + geom_histogram(mapping=aes(price), data=df, fill=I("white"), col=I("red"))
 ```
 
-## Ustaw szerokość kubełka histogramu
+### Ustaw szerokość kubełka histogramu
 ```{r}
 qplot(main="Price Histogram", xlab="price") + geom_histogram(mapping=aes(price), data=df, fill=I("white"), col=I("red"), binwidth=250)
 ```
 
-## Ogranicz oś x 
+### Ogranicz oś x 
 ```{r}
 qplot(main="Price Histogram", xlab="price") + geom_histogram(mapping=aes(price), data=df, fill=I("white"), col=I("red"), binwidth=250) + xlim(350,15000)
 ```
 
-## Sprawdź jak zmienna cut wpływa na histogram:
+### Sprawdź jak zmienna cut wpływa na histogram:
 
 ### za pomocą koloru
+```{r}
+qplot(main="Price Histogram grouped by cut", xlab="price") + geom_histogram(mapping=aes(price, color=cut), data=df, binwidth=250) + xlim(350,15000)
+```
 
 ### za pomocą paneli
 ```{r}
 qplot(main="Price Histogram grouped by cut", xlab="price") + facet_wrap(~cut) + geom_histogram(mapping=aes(price), data=df, fill=I("white"), col=I("red"), binwidth=250) + xlim(350,15000)
+```
+
+## Zwizualizuj relację między zmiennymi carat i price
+```{r}
+qplot(ylab="price", xlab="carat") + geom_point(data=df, mapping=aes(y=price, x=carat), size=.3)
 ```
