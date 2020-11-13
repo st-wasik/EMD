@@ -1,2 +1,3 @@
-## EDM
-### Data mining classes
+# EDM
+## Data mining classes
+### Stanisław Wasik 131846
