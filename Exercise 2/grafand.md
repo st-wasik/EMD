@@ -78,6 +78,6 @@ Powtórz kroki dla zmiennej price (być może zmieniając wartości części par
 Zwizualizuj relację między zmiennymi carat i price
 --------------------------------------------------
 
-    qplot(ylab="price", xlab="carat") + geom_point(data=df, mapping=aes(y=price, x=carat), size=.3)
+    qplot(ylab="price", xlab="carat") + geom_point(data=df, mapping=aes(y=price, x=carat, color=cut), size=.3) + geom_smooth(data=df, method = "gam", mapping=aes(x=carat, y=price))
 
 ![](grafand_files/figure-markdown_strict/unnamed-chunk-12-1.png)

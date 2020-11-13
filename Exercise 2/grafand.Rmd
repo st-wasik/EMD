@@ -77,5 +77,5 @@ qplot(main="Price Histogram grouped by cut", xlab="price") + facet_wrap(~cut) + 
 
 ## Zwizualizuj relację między zmiennymi carat i price
 ```{r}
-qplot(ylab="price", xlab="carat") + geom_point(data=df, mapping=aes(y=price, x=carat), size=.3)
+qplot(ylab="price", xlab="carat") + geom_point(data=df, mapping=aes(y=price, x=carat, color=cut), size=.3) + geom_smooth(data=df, method = "gam", mapping=aes(x=carat, y=price))
 ```
