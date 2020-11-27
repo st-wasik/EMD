@@ -79,8 +79,6 @@ fitTune2 <- train(churn ~ .,
 ## Porównaj algorytmy za pomocą wykresu
 ```{r, cache=TRUE}
 resamps <- resamples(list(rf = fitTune, knn = fitTune2))
-difValues <- diff(resamps)
-difValues
 
 theme1 <- trellis.par.get()
 theme1$plot.symbol$col = rgb(.2, .2, .2, .4)
