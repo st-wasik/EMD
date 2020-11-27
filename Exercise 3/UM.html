@@ -420,6 +420,7 @@ summary {
 <div id="załaduj-zbiór-danych-churn" class="section level2">
 <h2>Załaduj zbiór danych churn:</h2>
 <pre class="r"><code>library(modeldata)
+library(dplyr)
 data(mlc_churn)
 churnData &lt;- data.frame(mlc_churn)
 
@@ -548,16 +549,8 @@ fitTune2 &lt;- train(churn ~ .,
 <h2>Porównaj algorytmy za pomocą wykresu</h2>
 <pre class="r"><code>resamps &lt;- resamples(list(rf = fitTune, knn = fitTune2))
 difValues &lt;- diff(resamps)
-difValues</code></pre>
-<pre><code>## 
-## Call:
-## diff.resamples(x = resamps)
-## 
-## Models: rf, knn 
-## Metrics: ROC, Sens, Spec 
-## Number of differences: 1 
-## p-value adjustment: bonferroni</code></pre>
-<pre class="r"><code>theme1 &lt;- trellis.par.get()
+
+theme1 &lt;- trellis.par.get()
 theme1$plot.symbol$col = rgb(.2, .2, .2, .4)
 theme1$plot.symbol$pch = 16
 theme1$plot.line$col = rgb(1, 0, 0, .7)

@@ -2,8 +2,8 @@
 title: "UM"
 author: "Stanisław Wasik"
 date: "25.11.2020"
-output: md_document 
-#output: html_document
+#output: md_document 
+output: html_document
 ---
 
 ## Załaduj zbiór danych churn:
@@ -79,6 +79,7 @@ fitTune2 <- train(churn ~ .,
 ## Porównaj algorytmy za pomocą wykresu
 ```{r, cache=TRUE}
 resamps <- resamples(list(rf = fitTune, knn = fitTune2))
+difValues <- diff(resamps)
 
 theme1 <- trellis.par.get()
 theme1$plot.symbol$col = rgb(.2, .2, .2, .4)

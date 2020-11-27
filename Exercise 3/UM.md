@@ -158,16 +158,6 @@ Porównaj algorytmy za pomocą wykresu
 
     resamps <- resamples(list(rf = fitTune, knn = fitTune2))
     difValues <- diff(resamps)
-    difValues
-
-    ## 
-    ## Call:
-    ## diff.resamples(x = resamps)
-    ## 
-    ## Models: rf, knn 
-    ## Metrics: ROC, Sens, Spec 
-    ## Number of differences: 1 
-    ## p-value adjustment: bonferroni
 
     theme1 <- trellis.par.get()
     theme1$plot.symbol$col = rgb(.2, .2, .2, .4)
