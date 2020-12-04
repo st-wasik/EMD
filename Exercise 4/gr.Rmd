@@ -1,0 +1,69 @@
+---
+title: "Grupowanie"
+author: "Stanisław Wasik"
+date: "01.12.2020"
+output: md_document 
+#output: html_document
+---
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = TRUE)
+```
+
+```{r, message=FALSE}
+library(fpc)
+library(NbClust)
+library(dplyr)
+library(aricode)
+library(factoextra)
+```
+
+## Stwórz zbiór danych w następujący sposób:
+```{r,cache=TRUE}
+set.seed(23)
+face <- rFace(1000, p=2, dMoNo=3)
+df = data.frame(x=face[,1], y=face[,2])
+labels = as.integer(attr(face,"grouping"))
+```
+
+## Przetestuj różne algorytmy grupowania
+
+### K-means
+```{r, cache=TRUE}
+km.res <- eclust(df, "kmeans", k = 6, nstart = 25, graph = F)
+fviz_cluster(km.res, palette = "jco", ggtheme = theme_minimal())
+ARI(km.res$cluster, labels)
+table(labels, km.res$cluster)
+```
+
+### K-medioids
+```{r, cache=TRUE}
+pam.res <- eclust(df, "pam", k = 6, graph = F)
+fviz_cluster(pam.res, palette = "jco", ggtheme = theme_minimal())
+ARI(pam.res$cluster, labels)
+table(labels, pam.res$cluster)
+```
+
+### AHC
+```{r, cache=TRUE}
+ahc.res <- eclust(df, "hclust", k = 6, hc_metric = "manhattan", hc_method = "complete", graph = F)
+fviz_cluster(ahc.res, palette = "jco", ggtheme = theme_minimal())
+ARI(ahc.res$cluster, labels)
+table(labels, ahc.res$cluster)
+```
+
+### Diana
+```{r, cache=TRUE}
+diana.res <- eclust(df, "diana", k = 6, hc_metric = "manhattan")
+fviz_cluster(diana.res, palette = "jco", ggtheme = theme_minimal())
+ARI(diana.res$cluster, labels)
+table(labels, diana.res$cluster)
+```
+
+### Agnes
+```{r, cache=TRUE}
+agnes.res <- eclust(df, "agnes", k = 6, hc_metric = "manhattan")
+fviz_cluster(agnes.res, palette = "jco", ggtheme = theme_minimal())
+ARI(agnes.res$cluster, labels)
+table(labels, agnes.res$cluster)
+```
